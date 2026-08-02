@@ -1,0 +1,13 @@
+.obsidian/
+.variables-backup.json
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+desktop.ini
+.env
+secrets/
+.agent-canary/
+
+# never commit applied lab IPs
+# (keep Variables.md placeholders only)
