@@ -2,7 +2,7 @@
 
 Port-indexed pentest methodology notebook: decision trees, copy-paste command patterns, and **lessons from real practice boxes** (HTB / PG / personal labs). Built for exam pace and real engagements.
 
-Not a payload dump. Not 700 machine writeups. A **workflow** you can run under time pressure.
+A **workflow** you can run under time pressure. Commands and decision trees first. Not a payload dump or a library of full machine writeups.
 
 > Public study notes for authorized practice only (your labs, HTB/PG, courses you own). No exam keys, no live engagement dumps, no OffSec course content dump.
 
@@ -82,7 +82,7 @@ Do not commit applied IPs. Keep `Variables.md` as placeholders in git.
 
 ## Author
 
-SamsonCyber — built while grinding OSCP-style labs and consolidated from a larger private vault into a public, scrubbed field notebook.
+SamsonCyber. Built while grinding OSCP-style labs. Consolidated from a larger private vault into a public, scrubbed field notebook.
 
 ## License
 
