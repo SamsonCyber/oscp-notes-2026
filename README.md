@@ -30,7 +30,7 @@ cd oscp-notes
 # edit 00-Start-Here/Variables.md
 python3 fill-variables.py apply
 python3 fill-variables.py status
-python3 fill-variables.py reset   # restore placeholders
+python3 fill-variables.py reset # restore placeholders
 ```
 
 Open `Home.md` in Obsidian, VS Code, or any markdown reader. Wikilinks work best in Obsidian.
@@ -38,18 +38,18 @@ Open `Home.md` in Obsidian, VS Code, or any markdown reader. Wikilinks work best
 ## Layout
 
 ```
-00-Start-Here/     methodology, I'm Stuck, exam-day ops, variables, scoring overview
-01-Enumeration/    nmap + one note per common port/service
-02-Web-Attacks/    injection, LFI, auth bypass, web methodology
-03-Active-Directory/  no-creds → DA chain, roasting, BloodHound, lateral, DCSync
-04-Linux-PrivEsc/  ordered checklist + technique cards
+00-Start-Here/ methodology, I'm Stuck, exam-day ops, variables, scoring overview
+01-Enumeration/ nmap + one note per common port/service
+02-Web-Attacks/ injection, LFI, auth bypass, web methodology
+03-Active-Directory/ no-creds → DA chain, roasting, BloodHound, lateral, DCSync
+04-Linux-PrivEsc/ ordered checklist + technique cards
 05-Windows-PrivEsc/
-06-Pivoting/       Ligolo-ng first, then Chisel / SSH / proxychains
+06-Pivoting/ Ligolo-ng first, then Chisel / SSH / proxychains
 07-File-Transfers/
 08-Shells/
 09-Password-Attacks/
-10-Reporting/      structure reminders (use OffSec's official template for the real exam)
-fill-variables.py  placeholder IP binder
+10-Reporting/ structure reminders (use OffSec's official template for the real exam)
+fill-variables.py placeholder IP binder
 ```
 
 ## Scope (what is / is not here)
@@ -74,8 +74,8 @@ Verify current exam rules on [OffSec’s exam guide](https://help.offsec.com/hc/
 Placeholders used across notes: `ATTACKER_IP`, `TARGET_IP`, `DC_IP`, `MS01_IP`, `MS02_IP`, `STANDALONE1..3`, `INTERNAL_IP`, `INTERNAL_NET`, `DOMAIN`.
 
 ```bash
-python3 fill-variables.py apply   # write your IPs into every .md
-python3 fill-variables.py reset   # restore tokens (uses .variables-backup.json)
+python3 fill-variables.py apply # write your IPs into every .md
+python3 fill-variables.py reset # restore tokens (uses .variables-backup.json)
 ```
 
 Do not commit applied IPs. Keep `Variables.md` as placeholders in git.

@@ -2,7 +2,7 @@
 
 See also: [[Web-Methodology]]
 
-Less common on OSCP but can appear — usually to steal cookies or trigger actions as another user.
+Less common on OSCP but can appear - usually to steal cookies or trigger actions as another user.
 
 ## Test Payloads
 
@@ -45,11 +45,11 @@ python3 -m http.server 80
 
 ## From Your Boxes
 
-> **SecNotes** (HTB) — CSRF chained with contact form to steal admin session
+> **SecNotes** (HTB) - CSRF chained with contact form to steal admin session
 > - What worked: Password reset URL accepted GET params, sent via "Contact Us" form to admin tyler who clicked it automatically
 > - Not traditional XSS, but same principle: getting a user to visit your crafted URL
-> - Lesson: If XSS isn't possible, check if CSRF works — password resets accepting GET are a goldmine
+> - Lesson: If XSS isn't possible, check if CSRF works - password resets accepting GET are a goldmine
 
-> **Sorcerer** (PG) — Stored XSS indicators in web app (login portal with script tags in page source)
+> **Sorcerer** (PG) - Stored XSS indicators in web app (login portal with script tags in page source)
 > - Page source contained inline `<script>` tags handling form data
-> - Lesson: Check page source for inline JS that handles user input — potential DOM XSS vectors
+> - Lesson: Check page source for inline JS that handles user input - potential DOM XSS vectors

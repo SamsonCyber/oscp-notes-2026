@@ -1,6 +1,6 @@
 # OSCP Exam Report
 
-> **People who hack all the machines but write a bad report FAIL.** This is not hypothetical — it happens every exam cycle. OffSec grades your report, not your hacking. If a reader can't reproduce your steps, you get 0 for that machine.
+> **People who hack all the machines but write a bad report FAIL.** This is not hypothetical - it happens every exam cycle. OffSec grades your report, not your hacking. If a reader can't reproduce your steps, you get 0 for that machine.
 
 ---
 
@@ -8,9 +8,9 @@
 
 **Download the OffSec-provided report template BEFORE exam day:**
 - Check the [Exam Guide](https://help.offsec.com/hc/en-us/articles/360040165632) for the current link
-- It's a Word/Markdown template — fill in the blanks
+- It's a Word/Markdown template - fill in the blanks
 - Using their template guarantees you don't miss required sections
-- **Do NOT freelance the format** — use theirs
+- **Do NOT freelance the format** - use theirs
 
 ---
 
@@ -26,14 +26,14 @@
 - Brief description of what makes it exploitable
 
 ### 3. Exploitation / Initial Access
-- **Step-by-step commands** — EVERY command, in order
+- **Step-by-step commands** - EVERY command, in order
 - Screenshots of key output (shell obtained, first output)
 - If you modified an exploit: show what you changed and why
 - **local.txt proof screenshot**
 
 ### 4. Privilege Escalation
 - What misconfiguration/vulnerability you found
-- **Step-by-step commands** — EVERY command
+- **Step-by-step commands** - EVERY command
 - Screenshots of key steps
 - **proof.txt proof screenshot**
 
@@ -43,7 +43,7 @@
 
 ---
 
-## AD Set — Show the FULL Chain
+## AD Set - Show the FULL Chain
 
 The AD report must show the COMPLETE attack path as one connected narrative:
 
@@ -53,11 +53,11 @@ The AD report must show the COMPLETE attack path as one connected narrative:
 4. **DC compromise**: Final escalation (DCSync? secretsdump? delegation abuse?)
 5. proof.txt from DC
 
-**Every step must connect to the next.** "I found creds in a config file on Machine 1, sprayed them, and got WinRM on Machine 2" — that's the narrative OffSec wants.
+**Every step must connect to the next.** "I found creds in a config file on Machine 1, sprayed them, and got WinRM on Machine 2" - that's the narrative OffSec wants.
 
 ---
 
-## Proof Screenshots — EXACT Requirements
+## Proof Screenshots - EXACT Requirements
 
 ### Linux
 ```bash
@@ -84,7 +84,7 @@ whoami && hostname && ipconfig && type C:\Users\Administrator\Desktop\proof.txt
 | Mistake | Consequence |
 |---------|-------------|
 | Missing remediation section | Machine not scored |
-| Vague steps ("I ran the exploit") | Machine not scored — must be reproducible |
+| Vague steps ("I ran the exploit") | Machine not scored - must be reproducible |
 | Screenshot doesn't show whoami/hostname/ip | Proof not accepted |
 | Proof from non-interactive shell | Proof not accepted |
 | Wrong report format (not PDF) | Report rejected |
@@ -99,16 +99,16 @@ whoami && hostname && ipconfig && type C:\Users\Administrator\Desktop\proof.txt
 1. **As you work**: paste every command into your notes immediately
 2. **After each flag**: take proof screenshot RIGHT NOW, submit flag in panel
 3. **After each machine**: spend 5 minutes organizing notes while fresh
-4. **After exam**: you have 24 hours — use the official template, paste your notes in, add screenshots, write remediation
-5. **Before submitting**: re-read every machine section — can a stranger reproduce this?
+4. **After exam**: you have 24 hours - use the official template, paste your notes in, add screenshots, write remediation
+5. **Before submitting**: re-read every machine section - can a stranger reproduce this?
 
 ---
 
 ## Tools
 
 - **Official template**: Download from OffSec portal (do this before exam day)
-- **Screenshots**: Flameshot (`flameshot gui`) — annotate screenshots if helpful
+- **Screenshots**: Flameshot (`flameshot gui`) - annotate screenshots if helpful
 - **Terminal logging**: `script -a ~/oscp-exam/terminal.log` on every terminal
 - **Markdown to PDF**: `pandoc report.md -o report.pdf` or export from the template
 - **File name**: `OSCP-OS-XXXXX-Exam-Report.pdf` (your OS-ID)
-- Upload via OffSec portal — **confirm the upload succeeded**
+- Upload via OffSec portal - **confirm the upload succeeded**

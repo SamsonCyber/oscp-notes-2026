@@ -1,6 +1,6 @@
 # Web Application Testing Methodology
 
-Master checklist — work through sequentially for every web target.
+Master checklist - work through sequentially for every web target.
 
 ## 1. Technology Identification
 
@@ -50,7 +50,7 @@ gobuster dir -u http://$IP -w /usr/share/seclists/Discovery/Web-Content/common.t
 
 ## 5. Test Default Credentials
 
-Google "[software name] default credentials" — always try before bruteforce.
+Google "[software name] default credentials" - always try before bruteforce.
 
 See [[Authentication-Bypass]] for common defaults.
 

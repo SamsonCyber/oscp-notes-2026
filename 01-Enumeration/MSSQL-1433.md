@@ -89,10 +89,10 @@ SELECT * FROM OPENROWSET(BULK N'C:\Windows\System32\drivers\etc\hosts', SINGLE_C
 
 ## From Your Boxes
 
-> **Hokkaido** (PG/Windows) — Authenticated to MSSQL with domain creds (`discovery:REDACTED!`). Default DBs only, but IMPERSONATE check found `hrappdb-reader`. Impersonated to access `hrappdb`, dumped `sysauth` table containing `hrapp-service:REDACTED`.
+> **Hokkaido** (PG/Windows) - Authenticated to MSSQL with domain creds (`discovery:REDACTED!`). Default DBs only, but IMPERSONATE check found `hrappdb-reader`. Impersonated to access `hrappdb`, dumped `sysauth` table containing `hrapp-service:REDACTED`.
 > - What worked: `impacket-mssqlclient 'hokkaido-aerospace.com/discovery':'Start123!'@TARGET_IP -windows-auth` then `EXECUTE AS LOGIN = 'hrappdb-reader'` and `SELECT * FROM sysauth`
-> - Lesson: Always check IMPERSONATE privileges in MSSQL — you may access databases the current user cannot.
+> - Lesson: Always check IMPERSONATE privileges in MSSQL - you may access databases the current user cannot.
 
-> **MS02 (OSCP C)** (Course) — MSSQL on port 1433, nmap scripts revealed domain info via `ms-sql-ntlm-info` (domain: `oscp.exam`, computer: `MS02`). The ntlm-info script is free domain recon without creds.
+> **MS02 (OSCP C)** (Course) - MSSQL on port 1433, nmap scripts revealed domain info via `ms-sql-ntlm-info` (domain: `oscp.exam`, computer: `MS02`). The ntlm-info script is free domain recon without creds.
 > - What worked: `nmap --script ms-sql-info,ms-sql-ntlm-info -p 1433 TARGET_IP`
 > - Lesson: MSSQL ntlm-info script leaks domain name, computer name, and OS version with zero authentication required.

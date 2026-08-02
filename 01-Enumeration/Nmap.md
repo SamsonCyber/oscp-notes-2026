@@ -3,7 +3,7 @@
 ## Quick Scans
 
 ```bash
-# Initial fast scan — default scripts + version detection
+# Initial fast scan - default scripts + version detection
 nmap -sC -sV -oN nmap/initial $IP
 
 # Full TCP port scan
@@ -33,7 +33,7 @@ nmap -sT -p- $IP
 
 ```bash
 sudo nmap -O $IP
-sudo nmap -A $IP   # OS + version + scripts + traceroute
+sudo nmap -A $IP # OS + version + scripts + traceroute
 ```
 
 ## NSE Scripts
@@ -87,22 +87,22 @@ nmap -p- -sC -sV -oA nmap/full $IP
 
 ## From Your Boxes
 
-> **AuthBy** (PG/Windows) — Initial fast scan only showed ports 21, 242, 3145, 3389. The detailed service scan revealed port 242 was HTTP (Apache) and port 3145 was zFTPServer admin. Without `-sV`, these would have been listed as unknown services.
+> **AuthBy** (PG/Windows) - Initial fast scan only showed ports 21, 242, 3145, 3389. The detailed service scan revealed port 242 was HTTP (Apache) and port 3145 was zFTPServer admin. Without `-sV`, these would have been listed as unknown services.
 > - What worked: Full service scan with `-sC -sV` on all discovered ports
-> - Lesson: Non-standard ports running standard services are common. Always run `-sV` — HTTP on port 242 and FTP admin on 3145 are invisible without version detection.
+> - Lesson: Non-standard ports running standard services are common. Always run `-sV` - HTTP on port 242 and FTP admin on 3145 are invisible without version detection.
 
-> **Hokkaido** (PG/Windows) — Full port scan revealed 30+ open ports including MSSQL (1433), Kerberos (88), LDAP (389), RDP (3389), WinRM (5985). The `ms-sql-ntlm-info` and `rdp-ntlm-info` scripts both leaked the domain name `hokkaido-aerospace.com` and DC info without any credentials.
+> **Hokkaido** (PG/Windows) - Full port scan revealed 30+ open ports including MSSQL (1433), Kerberos (88), LDAP (389), RDP (3389), WinRM (5985). The `ms-sql-ntlm-info` and `rdp-ntlm-info` scripts both leaked the domain name `hokkaido-aerospace.com` and DC info without any credentials.
 > - What worked: `nmap -sC -sV -p- $IP` plus UDP scan `sudo nmap -sU --top-ports 20 $IP`
 > - Lesson: NTLM info scripts on MSSQL and RDP are free domain recon. Always run `-sC` (default scripts) on Windows targets.
 
-> **Pandora** (HTB) — TCP scan showed only SSH (22) and HTTP (80). The real breakthrough came from UDP scan finding SNMP (161), which leaked credentials in process command lines. Without the UDP scan, the box would have been a dead end.
+> **Pandora** (HTB) - TCP scan showed only SSH (22) and HTTP (80). The real breakthrough came from UDP scan finding SNMP (161), which leaked credentials in process command lines. Without the UDP scan, the box would have been a dead end.
 > - What worked: `sudo nmap -sU --top-ports 20 TARGET_IP` found SNMP on port 161
 > - Lesson: NEVER skip the UDP scan. SNMP (161) is the most common UDP finding and can leak entire credential chains.
 
-> **Sorcerer** (PG/Linux) — Full scan revealed NFS (2049), HTTP on port 7742 (nginx) and 8080 (Tomcat). The non-standard HTTP port 7742 hosted a login page with downloadable zip files containing SSH keys.
+> **Sorcerer** (PG/Linux) - Full scan revealed NFS (2049), HTTP on port 7742 (nginx) and 8080 (Tomcat). The non-standard HTTP port 7742 hosted a login page with downloadable zip files containing SSH keys.
 > - What worked: `nmap -p- -sC -sV $IP` discovered NFS + HTTP on unusual ports
 > - Lesson: Always run full `-p-` scan. Web apps on ports like 7742, 8080, 8443, 3000 are extremely common and often more vulnerable than port 80.
 
-> **Hutch** (PG/Windows) — Nmap's `http-webdav-scan` script detected WebDAV with PUT/DELETE/MOVE methods on IIS. This was the exploitation path — upload a webshell via WebDAV.
+> **Hutch** (PG/Windows) - Nmap's `http-webdav-scan` script detected WebDAV with PUT/DELETE/MOVE methods on IIS. This was the exploitation path - upload a webshell via WebDAV.
 > - What worked: Default script scan (`-sC`) auto-detected WebDAV and listed allowed methods
 > - Lesson: The `-sC` default scripts catch WebDAV, exposed .git dirs, and other low-hanging fruit automatically. Don't skip them.

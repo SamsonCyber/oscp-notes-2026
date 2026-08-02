@@ -83,9 +83,9 @@ If `sudo -l` shows `env_keep+=LD_PRELOAD`:
 #include <stdio.h>
 #include <stdlib.h>
 void _init() {
-    unsetenv("LD_PRELOAD");
-    setresuid(0,0,0);
-    system("/bin/bash -p");
+ unsetenv("LD_PRELOAD");
+ setresuid(0,0,0);
+ system("/bin/bash -p");
 }
 ```
 ```bash
@@ -118,46 +118,46 @@ sudo su
 
 ## From Your Boxes
 
-> **CozyHosting** (HTB) — sudo -l revealed SSH with sudo; GTFOBins entry for ssh gave root
+> **CozyHosting** (HTB) - sudo -l revealed SSH with sudo; GTFOBins entry for ssh gave root
 > - What worked: `sudo ssh -o ProxyCommand=';sh 0<&2 1>&2' x`
 > - Lesson: GTFOBins sudo entries for SSH, vim, less, etc. are exam staples.
 
-> **Knife** (HTB) — sudo -l revealed /usr/bin/knife (Chef tool) with NOPASSWD
+> **Knife** (HTB) - sudo -l revealed /usr/bin/knife (Chef tool) with NOPASSWD
 > - What worked: `sudo knife exec -E 'exec "/bin/sh"'`
 > - Lesson: Obscure binaries in sudo -l always have a GTFOBins or HackTricks entry. Google "[binary] gtfobins" immediately.
 
-> **Sunday** (HTB) — sudo -l revealed wget with NOPASSWD
+> **Sunday** (HTB) - sudo -l revealed wget with NOPASSWD
 > - What worked: GTFOBins sudo entry for wget to read/write arbitrary files
 > - Lesson: wget sudo = file overwrite privesc (same as SUID wget on XposedAPI).
 
-> **TartarSauce** (HTB) — sudo -l as www-data could run tar as user onuma
+> **TartarSauce** (HTB) - sudo -l as www-data could run tar as user onuma
 > - What worked: GTFOBins sudo entry for tar to escalate to onuma
 > - Lesson: Sudo to another user (not root) is still progress. Chain lateral + vertical privesc.
 
-> **Walla** (PG) — sudo -l revealed python with NOPASSWD running a specific script
+> **Walla** (PG) - sudo -l revealed python with NOPASSWD running a specific script
 > - What worked: Overwrote the script wifi_reset.py with a reverse shell, then ran `sudo /usr/bin/python /home/walter/wifi_reset.py`
 > - Lesson: If sudo runs a script you can write to, replace its contents.
 
-> **Cockpit** (PG) — sudo tar with wildcard injection led to overwriting /etc/sudoers
+> **Cockpit** (PG) - sudo tar with wildcard injection led to overwriting /etc/sudoers
 > - What worked: Tar wildcard injection to write `james ALL=(root) NOPASSWD: ALL` into /etc/sudoers
 > - Lesson: Sudo tar with wildcards (*) = checkpoint injection. Memorize the tar wildcard exploit.
 
-> **LaVita** (PG) — sudo composer with NOPASSWD
+> **LaVita** (PG) - sudo composer with NOPASSWD
 > - What worked: GTFOBins sudo entry for composer
 > - Lesson: Composer (PHP package manager) has a GTFOBins entry. Any scripting tool with sudo is dangerous.
 
-> **PostFish** (PG) — sudo /usr/bin/mail with NOPASSWD
+> **PostFish** (PG) - sudo /usr/bin/mail with NOPASSWD
 > - What worked: GTFOBins sudo entry for mail to spawn a shell
 > - Lesson: mail command has a shell escape. Check GTFOBins for every binary in sudo -l.
 
-> **Precious** (HTB) — sudo /usr/bin/ruby to run update_dependencies.rb with NOPASSWD
+> **Precious** (HTB) - sudo /usr/bin/ruby to run update_dependencies.rb with NOPASSWD
 > - What worked: YAML deserialization in the ruby script to set SUID on /bin/bash
 > - Lesson: When sudo runs a script that parses user-controlled input (YAML, JSON), look for injection.
 
-> **Networked** (HTB) — sudo /usr/local/sbin/changename.sh with NOPASSWD
+> **Networked** (HTB) - sudo /usr/local/sbin/changename.sh with NOPASSWD
 > - What worked: Command injection through network interface name parameter
 > - Lesson: Sudo scripts that take user input are vulnerable to command injection via spaces in arguments.
 
-> **Broker** (HTB) — sudo /usr/sbin/nginx with NOPASSWD
+> **Broker** (HTB) - sudo /usr/sbin/nginx with NOPASSWD
 > - What worked: Configured nginx to serve /etc/shadow or get a root shell
 > - Lesson: Web servers with sudo can be configured to serve sensitive files or execute code.

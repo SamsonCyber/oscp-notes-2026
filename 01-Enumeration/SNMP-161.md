@@ -58,11 +58,11 @@ nmap -sU --script snmp-brute,snmp-info,snmp-interfaces,snmp-processes,snmp-win32
 
 ## Tips
 
-- SNMP is UDP — will not appear in TCP scans. Always run UDP scan.
+- SNMP is UDP - will not appear in TCP scans. Always run UDP scan.
 - SNMP can leak usernames, running processes, and **passwords in process command-line arguments**.
-- Look at process list carefully — cron jobs, scripts with hardcoded creds, internal services.
+- Look at process list carefully - cron jobs, scripts with hardcoded creds, internal services.
 - SNMPv1/v2c send community strings in cleartext. SNMPv3 uses encryption.
-- `snmpwalk` output can be huge — redirect to file and grep through it.
+- `snmpwalk` output can be huge - redirect to file and grep through it.
 
 ```bash
 snmpwalk -v2c -c public $IP > snmp_full.txt
@@ -75,14 +75,14 @@ grep -i "password\|user\|login\|pass" snmp_full.txt
 
 ## From Your Boxes
 
-> **Pandora** (HTB) — SNMPwalk with `public` community string revealed a running process with hardcoded credentials in its command line: `/usr/bin/host_check -u daniel -p REDACTED Direct SSH access as daniel.
+> **Pandora** (HTB) - SNMPwalk with `public` community string revealed a running process with hardcoded credentials in its command line: `/usr/bin/host_check -u daniel -p REDACTED Direct SSH access as daniel.
 > - What worked: `snmpwalk -v2c -c public TARGET_IP` then grep output for passwords
 > - Lesson: SNMP process lists can contain passwords as command-line arguments. Always redirect full snmpwalk to a file and grep for password/user/login.
 
-> **Mentor** (HTB) — SNMP check with community string `public` revealed system info including hostname, OS version (Linux 5.15.0-56), and admin email. While it didn't directly leak creds, it confirmed the target OS and helped narrow the attack surface.
+> **Mentor** (HTB) - SNMP check with community string `public` revealed system info including hostname, OS version (Linux 5.15.0-56), and admin email. While it didn't directly leak creds, it confirmed the target OS and helped narrow the attack surface.
 > - What worked: `snmp-check TARGET_IP` and `snmpwalk -v2c -c public TARGET_IP`
-> - Lesson: Even when SNMP doesn't leak passwords, it reveals OS, hostname, and system architecture — useful for choosing exploits.
+> - Lesson: Even when SNMP doesn't leak passwords, it reveals OS, hostname, and system architecture - useful for choosing exploits.
 
-> **Kiero (OSCP B)** (Course) — SNMPwalk with `NET-SNMP-EXTEND-MIB` OID revealed extended SNMP data. Combined with default creds `kiero:REDACTED` found via SNMP enumeration, gained FTP access to SSH keys.
+> **Kiero (OSCP B)** (Course) - SNMPwalk with `NET-SNMP-EXTEND-MIB` OID revealed extended SNMP data. Combined with default creds `kiero:REDACTED` found via SNMP enumeration, gained FTP access to SSH keys.
 > - What worked: `snmpwalk -c public -v 2c TARGET_IP NET-SNMP-EXTEND-MIB::nsExtendObjects`
-> - Lesson: Try the `NET-SNMP-EXTEND-MIB` OID specifically — it can reveal custom scripts and commands not shown in standard walks.
+> - Lesson: Try the `NET-SNMP-EXTEND-MIB` OID specifically - it can reveal custom scripts and commands not shown in standard walks.

