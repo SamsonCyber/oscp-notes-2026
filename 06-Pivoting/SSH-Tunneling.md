@@ -1,6 +1,6 @@
 # SSH Tunneling
 
-No upload needed — just SSH access.
+No upload needed - just SSH access.
 
 See also: [[Pivoting-Methodology]], [[Proxychains]]
 
@@ -34,7 +34,7 @@ Now internal targets can reach PIVOT_IP:4444 which hits Kali:4444.
 ssh -N -D 1080 user@PIVOT_IP
 ```
 
-Edit `/etc/proxychains4.conf` — add at bottom:
+Edit `/etc/proxychains4.conf` - add at bottom:
 
 ```
 socks5 127.0.0.1 1080
@@ -47,14 +47,14 @@ proxychains nmap -sT -Pn -p REDACTED INTERNAL_IP
 proxychains curl http://INTERNAL_IP
 ```
 
-## sshuttle (VPN-like — Easiest)
+## sshuttle (VPN-like - Easiest)
 
 ```bash
 # Requires SSH access + root on Kali
 sshuttle -r user@PIVOT_IP TARGET_IP/24
 ```
 
-Now access internal IPs directly — no proxychains needed:
+Now access internal IPs directly - no proxychains needed:
 
 ```bash
 nmap -sT -Pn 10.10.10.X
@@ -81,7 +81,7 @@ ssh -N -D 1080 -p 2222 user@localhost
 
 | Flag | Purpose |
 |---|---|
-| `-N` | No shell — tunnel only |
+| `-N` | No shell - tunnel only |
 | `-f` | Background the connection |
 | `-L` | Local port forward |
 | `-R` | Remote port forward |
@@ -98,18 +98,18 @@ proxychains nmap -sT -Pn -p REDACTED INTERNAL_IP
 
 ## From Your Boxes
 
-> **Pandora** (HTB) — Local port forward to access internal-only Pandora FMS console, then exploited SQLi
+> **Pandora** (HTB) - Local port forward to access internal-only Pandora FMS console, then exploited SQLi
 > - What worked: `ssh -L 9001:REDACTED:80 daniel@TARGET_IP` then visited `http://127.0.0.1:9001/pandora_console/`
 > - Lesson: Internal web apps often have more vulns than external ones. Always check for services bound to localhost with `ss -tlnp`
 
-> **Poison** (HTB) — Forwarded internal VNC port to Kali for root access
+> **Poison** (HTB) - Forwarded internal VNC port to Kali for root access
 > - What worked: `ssh -N -L 34500:REDACTED:5901 charix@TARGET_IP` then `vncviewer 127.0.0.1::34500 -passwd secret`
-> - Lesson: VNC running as root on localhost is a goldmine — forward it and connect with any leaked VNC password file
+> - Lesson: VNC running as root on localhost is a goldmine - forward it and connect with any leaked VNC password file
 
-> **ServMon** (HTB) — Forwarded NSClient++ port restricted to localhost only
+> **ServMon** (HTB) - Forwarded NSClient++ port restricted to localhost only
 > - What worked: `ssh nadine@TARGET_IP -L 8443:REDACTED:8443` to bypass "allowed hosts = 127.0.0.1" restriction
-> - Lesson: Check config files for `allowed hosts` restrictions — SSH local forward makes your traffic appear as localhost
+> - Lesson: Check config files for `allowed hosts` restrictions - SSH local forward makes your traffic appear as localhost
 
-> **Boolean** (PG/Linux) — Used SSH with uploaded authorized_keys for initial access, then local SSH with found root key for privesc
+> **Boolean** (PG/Linux) - Used SSH with uploaded authorized_keys for initial access, then local SSH with found root key for privesc
 > - What worked: Uploaded SSH public key via directory traversal, then `ssh -i id_ed25519 remi@TARGET_IP`. For privesc: `ssh -i /home/remi/root root@127.0.0.1` with IdentitiesOnly config
 > - Lesson: "Too many authentication failures" means SSH is trying multiple keys. Fix with `IdentitiesOnly yes` and `IdentityAgent none` in `.ssh/config`

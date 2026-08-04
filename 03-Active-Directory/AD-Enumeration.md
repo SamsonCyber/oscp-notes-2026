@@ -11,7 +11,7 @@ nxc smb $DC -u user -p pass --pass-pol
 ```
 
 ```bash
-# LDAP — all users with descriptions and group memberships
+# LDAP - all users with descriptions and group memberships
 ldapsearch -x -H ldap://$DC -D "user@domain.local" -w 'pass' -b "DC=domain,DC=local" "(objectClass=user)" sAMAccountName description memberOf
 ```
 

@@ -7,12 +7,12 @@ See also: [[Web-Methodology]]
 Inject into any input field and check output:
 
 ```
-{{7*7}}       → 49 = Jinja2/Twig
-${7*7}        → 49 = Freemarker/Mako
-<%= 7*7 %>    → 49 = ERB
-#{7*7}        → 49 = Slim/Pug
+{{7*7}} → 49 = Jinja2/Twig
+${7*7} → 49 = Freemarker/Mako
+<%= 7*7 %> → 49 = ERB
+#{7*7} → 49 = Slim/Pug
 
-{{7*'7'}}     → 7777777 = Jinja2 (confirms vs Twig which returns 49)
+{{7*'7'}} → 7777777 = Jinja2 (confirms vs Twig which returns 49)
 ```
 
 ## Jinja2 (Python / Flask)
@@ -49,4 +49,4 @@ Reverse shell:
 - Use Wappalyzer to identify framework first (Flask, Django, Express, etc.)
 - HackTricks has a decision tree for identifying the template engine
 - If `{{}}` is blocked, try `{% %}` or `${}` syntax
-- Check for reflected input anywhere — not just obvious form fields
+- Check for reflected input anywhere - not just obvious form fields

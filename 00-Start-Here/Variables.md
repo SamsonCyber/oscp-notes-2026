@@ -8,7 +8,7 @@
 ## Network
 
 ```
-ATTACKER_IP  = 192.168.45.XXX
+ATTACKER_IP = 192.168.45.XXX
 ```
 
 ---
@@ -16,10 +16,10 @@ ATTACKER_IP  = 192.168.45.XXX
 ## AD Set (40 points)
 
 ```
-DOMAIN       = domain.htb
-DC_IP        = 10.10.10.X
-MS01_IP      = 10.10.10.X
-MS02_IP      = 10.10.10.X
+DOMAIN = domain.htb
+DC_IP = 10.10.10.X
+MS01_IP = 10.10.10.X
+MS02_IP = 10.10.10.X
 ```
 
 ---
@@ -27,9 +27,9 @@ MS02_IP      = 10.10.10.X
 ## Standalones (20 points each)
 
 ```
-STANDALONE1  = 192.168.X.X
-STANDALONE2  = 192.168.X.X
-STANDALONE3  = 192.168.X.X
+STANDALONE1 = 192.168.X.X
+STANDALONE2 = 192.168.X.X
+STANDALONE3 = 192.168.X.X
 ```
 
 ---
@@ -37,7 +37,7 @@ STANDALONE3  = 192.168.X.X
 ## Pivoting (fill as discovered)
 
 ```
-INTERNAL_IP  = 172.16.X.X
+INTERNAL_IP = 172.16.X.X
 INTERNAL_NET = 172.16.X.0/24
 ```
 

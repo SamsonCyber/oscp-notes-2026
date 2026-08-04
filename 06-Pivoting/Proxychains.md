@@ -41,11 +41,11 @@ proxychains crackmapexec smb INTERNAL_IP -u user -p password
 
 ## Important Notes
 
-- **nmap**: Must use `-sT` (full connect) — SYN scan (`-sS`) does not work through SOCKS
-- **nmap**: Must use `-Pn` to skip ping — ICMP does not go through SOCKS
-- **DNS**: May not resolve through proxy — use IPs directly or set `proxy_dns` in config
-- **Speed**: It is slow — scan specific ports, not full range
-- **UDP**: Does not work through SOCKS — TCP only
+- **nmap**: Must use `-sT` (full connect) - SYN scan (`-sS`) does not work through SOCKS
+- **nmap**: Must use `-Pn` to skip ping - ICMP does not go through SOCKS
+- **DNS**: May not resolve through proxy - use IPs directly or set `proxy_dns` in config
+- **Speed**: It is slow - scan specific ports, not full range
+- **UDP**: Does not work through SOCKS - TCP only
 - **Some tools break**: If a tool does not work through proxychains, switch to [[Ligolo-ng]] which avoids this problem entirely
 
 ## Chaining Multiple Proxies
@@ -72,14 +72,14 @@ If it hangs, check that your tunnel ([[Chisel]], [[SSH-Tunneling]]) is still run
 
 ## From Your Boxes
 
-> **Lab AD chain** (personal lab) — Proxychains + chisel SOCKS for nmap scanning and evil-winrm to internal targets
+> **Lab AD chain** (personal lab) - Proxychains + chisel SOCKS for nmap scanning and evil-winrm to internal targets
 > - What worked: `proxychains nmap -sT --top-ports 100 TARGET_IP` and `proxychains evil-winrm -u celia.almeda -H HASH -i TARGET_IP`
-> - Lesson: Use `--top-ports 100` through proxychains — full port scans are painfully slow through SOCKS
+> - Lesson: Use `--top-ports 100` through proxychains - full port scans are painfully slow through SOCKS
 
-> **OSCP B — MS01** (Course) — Proxychains for kerberoasting, SMB enumeration, and MSSQL access against internal AD
+> **OSCP B - MS01** (Course) - Proxychains for kerberoasting, SMB enumeration, and MSSQL access against internal AD
 > - What worked: `proxychains impacket-GetUserSPNs -dc-ip TARGET_IP 'OSCP.exam/web_svc:REDACTED'` and `proxychains python3 mssqlclient.py -windows-auth OSCP.exam/sql_svc:REDACTED`
 > - Lesson: All impacket tools work through proxychains. crackmapexec/nxc works too for quick credential validation: `proxychains crackmapexec smb INTERNAL_IP -u user -p REDACTED
 
-> **Nagoya** (PG/Windows) — Proxychains to access MSSQL through chisel tunnel
+> **Nagoya** (PG/Windows) - Proxychains to access MSSQL through chisel tunnel
 > - What worked: `proxychains ./mssqlclient.py svc_mssql:REDACTED -windows-auth`
 > - Lesson: Use `socks5 127.0.0.1 1080` in proxychains config (chisel default). If using SSH dynamic forward, match the port you specified with `-D`

